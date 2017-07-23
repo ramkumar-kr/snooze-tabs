@@ -2,7 +2,8 @@ function handleAlarm(alarm) {
   var createTab = browser.tabs.create({ url: alarm.name });
   createTab.then(function (tab) {
     var uri = new URL(tab.url);
-    localStorage.removeItem(tab.url);
+    console.log(tab.url);
+    localStorage.removeItem(alarm.name);
     browser.notifications.create(tab.url,
       {
         type: "basic",
@@ -10,7 +11,7 @@ function handleAlarm(alarm) {
         message: `A new tab to ${alarm.name} has been created`,
         iconUrl: browser.extension.getURL("resources/alert.png")
       });
-    browser.sidebarAction.setPanel({ panel: browser.extension.getURL("popup/panel.html") });
+    reloadViews();
   });
 }
 
@@ -88,6 +89,7 @@ function onGot(item) {
 
 function clearAlarm(url) {
   localStorage.removeItem(url);
+  browser.alarms.clear(url);
 }
 
 function handleMessage(params, sender, response) {
