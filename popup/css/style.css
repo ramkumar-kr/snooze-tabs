@@ -1,0 +1,12 @@
+.left-padded{
+  padding-left: 7%; 
+}
+
+#unit{
+  width: 100%;
+}
+
+.danger{
+  background-color: red;
+}
+
