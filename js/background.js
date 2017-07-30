@@ -1,5 +1,5 @@
 function handleAlarm(alarm) {
-  var createTab = browser.tabs.create({ url: alarm.name });
+  var createTab = browser.tabs.create({ url: alarm.name, active: false });
   createTab.then(function (tab) {
     var uri = new URL(tab.url);
     console.log(tab.url);
@@ -120,6 +120,10 @@ function createAlarms(items) {
 }
 
 function handleStartup() {
+  // browser.tabs.create({url: "https://www.google.com"})
+  // var delay = 0;
+  // delay = Date.now() + 60000;
+  // localStorage.setItem("https://www.google.com", new Date(delay));
   var list = getList();
   createAlarms(list);
 }
@@ -129,4 +133,6 @@ browser.runtime.onMessage.addListener(handleMessage);
 
 browser.alarms.onAlarm.addListener(handleAlarm);
 
-// browser.runtime.onSuspendCancelled.addListener(handleStartup);
+// browser.runtime.onStartup.addListener(handleStartup);
+
+handleStartup();
