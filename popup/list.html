@@ -13,9 +13,9 @@
       <div class="panel-title centered">Manage List</div>
     </div>
     <div class="card-body">
-      <table id="list" class="">
+      <div id="list" class="">
 
-      </table>
+      </div>
 
     </div>
     <div class="card-footer">
@@ -24,5 +24,21 @@
   </div>
   <script src="js/list.js"></script>
 </body>
+
+<template id="alarm-card">
+  <div class="column col-12 col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 id="heading"></h4>
+      </div>
+      <div class="card-body" id="time">
+      </div>
+      <div class="card-footer">
+        <a id="link" href="" target="_blank" class="btn btn-primary">Open</a>
+        <button id="delete" class="danger btn float-right">Delete</button>
+      </div>
+    </div>
+  </div>
+</template>
 
 </html>

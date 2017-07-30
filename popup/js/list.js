@@ -14,59 +14,31 @@ function listAlarms(alarms){
   var list = document.getElementById('list');
   var html = "";
   for(var a of alarms){
-    // var uri = new URL(a.url);
-    // html = html + `
-    //   <div class="column col-12 col-xs-12">
-    //     <div class="card">
-    //       <div class="card-header">
-    //         <h4>${uri.hostname}</h4>
-    //       </div>
-    //       <div class="card-footer">
-    //         <a href=${a.url} target="_blank" class="btn btn-primary">Open</a>
-    //         <button onclick="clearAlarm" class="danger btn float-right">Delete</button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // `;
+    var card = document.getElementById("alarm-card");
+    var title = card.content.getElementById("heading");
+    var when = card.content.getElementById("time");
+    var body = card.content.getElementById("link");
+    var button = card.content.getElementById("delete");
 
-    var row = document.createElement('tr');
-    
-    // Create the URL item
-    var urlItem = document.createElement('td');
-    var url = document.createElement('a');
-    url.setAttribute('href', a.url);
-    url.setAttribute('target', '_blank');
-
-
-    // Add the url text
     var uri = new URL(a.url);
-    var urlText = document.createTextNode(uri.origin);
-    url.appendChild(urlText);
+    title.textContent = uri.origin;
 
-    urlItem.appendChild(url);
+    button.setAttribute("value", a.url);
 
-    //Create the action button
-    var actionItem = document.createElement('td');
-    var action = document.createElement("button");
-    action.setAttribute("class", "btn btn-sm");
-    action.setAttribute("value", a.url);
-    action.addEventListener("click", clearAlarm);
+    var time = a.delay;
+    when.textContent = new Date(time);
 
+    body.setAttribute("href", a.url);
 
-    // Add the close icon
-    var icon = document.createTextNode('X');
-    action.appendChild(icon);
-
-    actionItem.appendChild(action);
-
-    // Append items to table row
-    row.appendChild(urlItem);
-    row.appendChild(actionItem);
-
-    // Append row to table
-    list.appendChild(row);
+    list.appendChild(document.importNode(card.content, true));
   }
-  // list.innerHTML = html;
+
+  var buttons = document.getElementsByClassName("danger");
+  for (var index = 0; index < buttons.length; index++) {
+    var element = buttons[index];
+    element.addEventListener("click", clearAlarm);
+    
+  }
 }
 
 function loadAlarms(){

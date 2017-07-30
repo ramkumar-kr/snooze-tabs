@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tab Snooze",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Ramkumar K R",
   "description":"Snooze tabs to open at a specific time",
   "permissions": [

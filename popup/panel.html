@@ -10,12 +10,14 @@
 <body>
   <div class="card">
     <div class="card-header">
-      <div class="panel-title"><h4 class="centered">Manage List</h4></div>
+      <div class="panel-title">
+        <h4 class="centered">Manage List</h4>
+      </div>
     </div>
     <div class="card-body">
-      <table id="list" class="">
+      <div id="list" class="">
 
-      </table>
+      </div>
 
     </div>
     <div class="card-footer">
@@ -24,6 +26,21 @@
   </div>
   <script src="js/list.js"></script>
   <script src="js/panel.js"></script>
+  <template id="alarm-card">
+    <div class="column col-12 col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 id="heading"></h5>
+        </div>
+        <div class="card-body" id="time">
+        </div>
+        <div class="card-footer">
+          <a id="link" href="" target="_blank" class="btn btn-primary">Open</a>
+          <button id="delete" class="danger btn float-right">Delete</button>
+        </div>
+      </div>
+    </div>
+  </template>
 </body>
 
 </html>
