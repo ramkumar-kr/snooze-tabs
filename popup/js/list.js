@@ -1,11 +1,6 @@
 function clearAlarm(e){
-  // browser.alarms.clear(e.target.value, function(){
-  //   window.location.href = 'list.html'
-  // });
   var child = e.target;
   browser.runtime.sendMessage({ op: "clearAlarm", args: e.target.value })
-  // parent.removeChild(child);
-  // loadAlarms();
   window.location.reload();
 
 }
@@ -43,7 +38,7 @@ function listAlarms(alarms){
 
 function loadAlarms(){
   // browser.alarms.getAll().then(listAlarms);
-  browser.runtime.sendMessage({op: "getList"}).then(listAlarms);
+  browser.storage.local.get().then((items) => { listAlarms(items.alarms) });
 }
 
 document.addEventListener('DOMContentLoaded', loadAlarms);
