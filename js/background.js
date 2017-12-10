@@ -1,5 +1,6 @@
 async function storeAlarms(alarms) {
-  browser.storage.local.set({ alarms: alarms });
+  var uniqAlarms = await removeDuplicates(alarms);
+  browser.storage.local.set({ alarms: uniqAlarms });
   createAlarms();
 }
 
@@ -103,7 +104,12 @@ async function createAlarms() {
     var alarm = await browser.alarms.get(storedAlarm.url);
     if (alarm == undefined) {
       var delay = parseInt(storedAlarm.delay);
-      browser.alarms.create(storedAlarm.url, { when: delay });
+      if(delay > Date.now()){
+        browser.alarms.create(storedAlarm.url, { when: delay });
+      } 
+      else{
+        handleAlarm({ name: storedAlarm.url })
+      }
     }
   }
 }
@@ -116,7 +122,7 @@ async function clearAlarm(url) {
       alarms.splice(i,1);
     }
   });
-  browser.storage.local.set({ alarms: alarms });
+  storeAlarms(alarms);
   browser.alarms.clear(url);
 }
 
@@ -132,17 +138,29 @@ function handleMessage(params, sender, response) {
 
 }
 
-function moveStorage(details) {
-  if (((details.reason === "update") && (localStorage.length > 0)) || (details.temporary === true) ){
-    var list = [];
-    for (var key in localStorage) {
-      if (localStorage.hasOwnProperty(key)) {
-        var element = localStorage[key];
-        var date = new Date(element)
-        list.push({ "url": key, "delay": date.getTime(), pinned: true });
+async function removeDuplicates(alarms) {
+  var uniqAlarms = alarms.filter((element, index, self) => {
+    return self.map(mapObj => mapObj.url).indexOf(element.url) === index;
+  })
+  return uniqAlarms;
+}
+
+function handleInstall(details) {
+  if (details.reason === "update") {
+    if (localStorage.length > 0) {
+      var list = [];
+      for (var key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+          var element = localStorage[key];
+          var date = new Date(element)
+          list.push({ "url": key, "delay": date.getTime(), pinned: true });
+        }
       }
+      storeAlarms(list);
     }
-    storeAlarms(list);
+  }
+  else if (details.reason === "install") {
+    storeAlarms([]);
   }
 }
 
@@ -151,6 +169,6 @@ browser.runtime.onMessage.addListener(handleMessage);
 
 browser.alarms.onAlarm.addListener(handleAlarm);
 
-browser.runtime.onInstalled.addListener(moveStorage);
+browser.runtime.onInstalled.addListener(handleInstall);
 
 browser.runtime.onStartup.addListener(createAlarms);
