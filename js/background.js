@@ -72,6 +72,9 @@ async function snoozeTab(delaySent) {
   if (validate(tab.url)) {
     var store = await browser.storage.local.get();
     var alarms = store.alarms;
+    if(alarms == undefined){
+      alarms = [];
+    }
     alarms.push({ url: tab.url, delay: delay, pinned: tab.pinned, incognito: tab.incognito });
     browser.alarms.create(tab.url, { "when": delay });
     storeAlarms(alarms);
