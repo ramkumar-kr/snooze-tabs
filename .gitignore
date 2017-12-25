@@ -1,0 +1,7 @@
+.history
+.tags
+npm-debug.log
+web-ext-artifacts
+.vscode
+node_modules
+dist
