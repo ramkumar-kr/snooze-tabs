@@ -21,4 +21,4 @@ Snooze tabs to open at a specific time in the future
 
 ## Reporting Issues  / Giving feedback
 
-Please create an issue in Github - [https://github.com/ramkumar-kr/snooze-tabs/issues]((https://github.com/ramkumar-kr/snooze-tabs/issues)
+Please create an issue in Github - [https://github.com/ramkumar-kr/snooze-tabs/issues](https://github.com/ramkumar-kr/snooze-tabs/issues)
