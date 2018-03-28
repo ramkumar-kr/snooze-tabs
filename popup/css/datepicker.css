@@ -1,0 +1,7 @@
+body{
+    padding: 10px;
+}
+
+.big-gap{
+    grid-row-gap: 10px;
+}

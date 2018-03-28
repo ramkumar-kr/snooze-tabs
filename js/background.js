@@ -5,13 +5,13 @@ async function storeAlarms(alarms) {
 }
 
 async function storedAlarms() {
-  var store = await browser.storage.local.get();
+  var store = await browser.storage.local.get("alarms");
   var alarms = store.alarms;
   return (alarms);
 }
 
 async function handleAlarm(alarm) {
-  var store = await browser.storage.local.get();
+  var store = await browser.storage.local.get("alarms");
   var alarms = store.alarms;
   alarms.forEach((a, i) => {
     if (a.url == alarm.name) {
@@ -20,7 +20,7 @@ async function handleAlarm(alarm) {
         browser.windows.create({ incognito: true, url: a.url });
       }
       else{
-        var detail = { url: a.url, active: false, pinned: a.pinned };
+        var detail = { url: a.url, active: false, pinned: a.pinned, openInReaderMode: a.openInReaderMode };
         browser.tabs.create(detail);
       }
       browser.notifications.create(a.url,
@@ -65,17 +65,20 @@ function reloadViews() {
   }
 }
 
-async function snoozeTab(delaySent) {
-  var delay = Date.now() + delaySent.delay * 60 * 1000;
+async function snoozeTab(delay) {
+  // var delay = Date.now() + delaySent.delay * 60 * 1000;
   var tabs = await browser.tabs.query({ currentWindow: true, active: true });
   var tab = tabs[0];
+  if(tab.isInReaderMode){
+    tab.url = decodeURIComponent(tab.url.split("about:reader?url=")[1]);
+  }
   if (validate(tab.url)) {
-    var store = await browser.storage.local.get();
+    var store = await browser.storage.local.get("alarms");
     var alarms = store.alarms;
     if(alarms == undefined){
       alarms = [];
     }
-    alarms.push({ url: tab.url, delay: delay, pinned: tab.pinned, incognito: tab.incognito });
+    alarms.push({ url: tab.url, delay: delay, pinned: tab.pinned, incognito: tab.incognito, openInReaderMode: tab.isInReaderMode });
     browser.alarms.create(tab.url, { "when": delay });
     storeAlarms(alarms);
     browser.notifications.create(tab.url,
@@ -118,7 +121,7 @@ async function createAlarms() {
 }
 
 async function clearAlarm(url) {
-  var store = await browser.storage.local.get();
+  var store = await browser.storage.local.get("alarms");
   var alarms = store.alarms;
   alarms.forEach((alarm, i) => {
     if(alarm.url === url){
@@ -129,13 +132,29 @@ async function clearAlarm(url) {
   browser.alarms.clear(url);
 }
 
-function handleMessage(params, sender, response) {
+async function getPreferences() {
+  return browser.storage.local.get("preferences");
+}
+
+async function setPreferences(changedPreferences) {
+  var preferences = await getPreferences();
+  var newPreferences = Object.assign({}, preferences, changedPreferences);
+  browser.storage.local.set({preferences: newPreferences});
+}
+
+async function handleMessage(params, sender, sendResponse) {
   switch (params.op) {
     case "snooze":
-      snoozeTab(params.args);
+      snoozeTab(params.args.time);
       break;
     case "clearAlarm":
-      clearAlarm(params.args)
+      clearAlarm(params.args);
+      break;
+    case "getPreferences":
+      return getPreferences();
+      break;
+    case "setPreferences":
+      setPreferences(params.args);
       break;
   }
 
@@ -148,7 +167,7 @@ async function removeDuplicates(alarms) {
   return uniqAlarms;
 }
 
-function handleInstall(details) {
+async function handleInstall(details) {
   if (details.reason === "update") {
     if (localStorage.length > 0) {
       var list = [];
@@ -160,10 +179,15 @@ function handleInstall(details) {
         }
       }
       storeAlarms(list);
+      var preferences = await getPreferences();
     }
   }
-  else if (details.reason === "install") {
+  else if (details.reason === "install" || details.temporary == true) {
     storeAlarms([]);
+  }
+
+  if(typeof preferences === 'undefined'){
+    setPreferences({ hours: 3, TimeOfDay: { hours: 9, minutes: 0 } });    
   }
 }
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tab Snooze",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "author": "Ramkumar K R",
   "description":"Snooze tabs to open at a specific time",
   "permissions": [
@@ -21,7 +21,7 @@
     ],
     "default_title": "Snooze",
     "default_popup": "popup/index.html",
-    "browser_style": false
+    "browser_style": true
   },
   "applications": {
     "gecko": {
@@ -39,5 +39,8 @@
   },
   "icons": {
     "614": "resources/icon.png"
+  },
+  "options_ui": {
+    "page": "options/index.html"
   }
 }

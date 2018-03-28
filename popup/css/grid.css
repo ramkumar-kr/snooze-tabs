@@ -1,0 +1,51 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 1px;
+    grid-auto-rows: minmax(20px, 1fr);
+}
+
+.full-width{
+    grid-column: span 3;
+    text-align: center;
+    align-content: center;
+}
+
+.default-button{
+    text-decoration: none;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: 400;
+    border: 1px dotted gray;
+    background-color: #f2f1f0;
+}
+
+.default-button:disabled{
+    opacity: 0.4;
+}
+
+.default-button:hover{
+    background-color: rgba(12, 12, 13, 0.2);
+}
+
+.default-button:pressed{
+    background-color: rgba(12, 12, 13, 0.3);
+}
+
+button:focus{
+    box-shadow: 0 0 0 1px #0a84ff inset, 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3)
+}
+
+.two-thirds{
+    grid-column: span 2;
+}
+
+p,.text{
+    width: 100%;
+    align-self: center;
+    text-align: center;
+    vertical-align: middle;
+}
