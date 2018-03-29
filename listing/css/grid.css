@@ -1,0 +1,56 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.wrapper + .wrapper {
+    border-top: 2px solid gainsboro;
+}
+
+.danger-button{
+    height: 100%;
+    width: fit-content;
+    border: none;
+    text-align: center;
+    background-color: firebrick;
+    color: white;
+}
+
+.date{
+    vertical-align: bottom;
+    padding-bottom: 0;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.url{
+    display: inline-block;
+    width: 100%;
+}
+
+p#domainText{
+    text-overflow: ellipsis;
+    text-align: center;
+    align-self: top center;
+    word-wrap: break-word;
+}
+
+.block-button{
+    background-color: #0060df;
+    border-radius: 4px;
+    color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 15px;
+    font-weight: 400;
+    min-width: 132px;
+    width: 98%;
+    margin-left: 1%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    height: 48px;
+    text-decoration: none;
+    text-align: center;
+}

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tab Snooze",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Ramkumar K R",
   "description":"Snooze tabs to open at a specific time",
   "permissions": [
@@ -32,7 +32,7 @@
   "sidebar_action": {
     "default_icon": "resources/icon.png",
     "default_title": "Snoozed Tabs",
-    "default_panel": "popup/panel.html"
+    "default_panel": "listing/index.html?sidebar=true"
   },
   "background": {
     "scripts": ["js/background.js"]
@@ -41,6 +41,7 @@
     "614": "resources/icon.png"
   },
   "options_ui": {
-    "page": "options/index.html"
+    "page": "options/index.html",
+    "open_in_tab": true
   }
 }

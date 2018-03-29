@@ -86,7 +86,7 @@ document.getElementById("datePicker").addEventListener("click", () => {
 });
 
 document.getElementById("manageTabs").addEventListener("click", () => {
-  window.location.href = browser.runtime.getURL("/popup/list.html");
+  window.location.href = browser.runtime.getURL("/listing/index.html") + "?popup=true";
 });
 
 document.getElementById("preferences").addEventListener("click", () => {

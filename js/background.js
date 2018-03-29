@@ -65,11 +65,15 @@ function reloadViews() {
   }
 }
 
+function inReaderMode(tab) {
+  return (tab.url.isInReaderMode || /^(about\:reader\?url\=)/.test(tab.url));
+}
+
 async function snoozeTab(delay) {
   // var delay = Date.now() + delaySent.delay * 60 * 1000;
   var tabs = await browser.tabs.query({ currentWindow: true, active: true });
   var tab = tabs[0];
-  if(tab.isInReaderMode){
+  if(inReaderMode(tab)){
     tab.url = decodeURIComponent(tab.url.split("about:reader?url=")[1]);
   }
   if (validate(tab.url)) {
@@ -78,7 +82,7 @@ async function snoozeTab(delay) {
     if(alarms == undefined){
       alarms = [];
     }
-    alarms.push({ url: tab.url, delay: delay, pinned: tab.pinned, incognito: tab.incognito, openInReaderMode: tab.isInReaderMode });
+    alarms.unshift({ url: tab.url, title: tab.title, delay: delay, pinned: tab.pinned, incognito: tab.incognito, openInReaderMode: tab.isInReaderMode });
     browser.alarms.create(tab.url, { "when": delay });
     storeAlarms(alarms);
     browser.notifications.create(tab.url,
@@ -93,11 +97,12 @@ async function snoozeTab(delay) {
     browser.tabs.remove(tab.id);
   }
   else {
+    console.log(tab.url);
     browser.notifications.create(tab.url,
       {
         type: "basic",
         title: "Error!",
-        message: "Tab " + tab.title + " cannot be snoozed since it is not a valid link",
+        message: "Tab " + tab.url + " cannot be snoozed since it is not a valid link",
         iconUrl: browser.extension.getURL("resources/error.png")
       }
     );
