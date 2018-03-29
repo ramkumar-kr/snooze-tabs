@@ -1,0 +1,26 @@
+.grid{
+     display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+}
+
+.mini-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(40px, 1fr);
+    grid-row-gap: 20px;
+    border-bottom: 2px solid gainsboro;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.mini-grid:last-child{
+    border-bottom: none;
+}
+
+.grid-input{
+    height: 50%;
+    width: fit-content;
+    margin-top: 25%;
+    margin-bottom: 25%;
+}

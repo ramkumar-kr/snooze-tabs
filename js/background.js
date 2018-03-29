@@ -138,7 +138,10 @@ async function getPreferences() {
 
 async function setPreferences(changedPreferences) {
   var preferences = await getPreferences();
-  var newPreferences = Object.assign({}, preferences, changedPreferences);
+  var newPreferences = {
+    hours: (changedPreferences.hours || preferences.preferences.hours),
+    TimeOfDay: (changedPreferences.TimeOfDay || preferences.preferences.TimeOfDay)
+  }
   browser.storage.local.set({preferences: newPreferences});
 }
 
@@ -179,14 +182,14 @@ async function handleInstall(details) {
         }
       }
       storeAlarms(list);
-      var preferences = await getPreferences();
     }
   }
   else if (details.reason === "install" || details.temporary == true) {
     storeAlarms([]);
   }
 
-  if(typeof preferences === 'undefined'){
+  var prefs = await getPreferences();
+  if(typeof prefs.preferences === 'undefined'){
     setPreferences({ hours: 3, TimeOfDay: { hours: 9, minutes: 0 } });    
   }
 }
