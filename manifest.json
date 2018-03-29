@@ -11,12 +11,11 @@
     "storage"
   ],
   "browser_action": {
-    "default_icon": "resources/icon.png",
     "theme_icons": [
       {
         "light": "resources/icon-dark.png",
         "dark": "resources/icon.png",
-        "size": 614
+        "size": 48
       }
     ],
     "default_title": "Snooze",
