@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/grid.css" />
-  <link rel="stylesheet" href="css/spectre.min.css" />
 </head>
 
 <body>
@@ -16,12 +15,13 @@
   <button id="refreshButton" class="block-button">Refresh</button>
 </body>
 
+<script src="../js/browser-polyfill.min.js"></script>
 <script src="js/list.js"></script>
 
 <template id="alarm-card">
   <div class="wrapper">
     <div>
-      <a id="url" class="url"><p id="domainText"></p></a>
+      <a id="url" class="url" href="#"><p id="domainText"></p></a>
       <p id="datetime" class="date"></p>
     </div>
     <button id="deleteButton" class="danger-button">Delete</button>

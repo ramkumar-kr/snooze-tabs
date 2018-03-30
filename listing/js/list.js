@@ -2,7 +2,6 @@ function clearAlarm(e) {
   var child = e.target;
   browser.runtime.sendMessage({ op: "clearAlarm", args: e.target.value })
   window.location.reload();
-
 }
 
 function listAlarms(alarms) {
@@ -18,6 +17,7 @@ function listAlarms(alarms) {
     var uri = new URL(a.url);
     domainText.textContent = uri.origin;
     url.setAttribute("href", a.url);
+    domainText.setAttribute("value", a.url);
 
     var time = new Date(a.delay);
     datetime.textContent = formattedDate(time);
@@ -32,6 +32,15 @@ function listAlarms(alarms) {
     var element = buttons[index];
     element.addEventListener("click", clearAlarm);
 
+  }
+
+  var elements = document.getElementsByClassName("url");
+  for (let index = 0; index < elements.length; index++) {
+    const element = elements[index];
+    element.addEventListener("click", function (e) {
+      e.preventDefault();
+      browser.tabs.create({ url: this.href, active: true });
+    })
   }
 }
 
@@ -56,10 +65,10 @@ document.getElementById("goBackButton").addEventListener("click", function () {
 });
 
 function removeIrrelevantButtons() {
-  if(/sidebar/.test(window.location.search)){
+  if (/sidebar/.test(window.location.search)) {
     document.getElementById("goBackButton").remove();
   }
-  else if(/popup/.test(window.location.search)){
+  else if (/popup/.test(window.location.search)) {
     document.getElementById("refreshButton").remove();
   }
 }

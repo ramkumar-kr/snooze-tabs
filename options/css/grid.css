@@ -17,10 +17,3 @@
 .mini-grid:last-child{
     border-bottom: none;
 }
-
-.grid-input{
-    height: 50%;
-    width: fit-content;
-    margin-top: 25%;
-    margin-bottom: 25%;
-}

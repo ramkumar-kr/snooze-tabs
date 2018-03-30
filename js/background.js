@@ -20,7 +20,7 @@ async function handleAlarm(alarm) {
         browser.windows.create({ incognito: true, url: a.url });
       }
       else{
-        var detail = { url: a.url, active: false, pinned: a.pinned, openInReaderMode: a.openInReaderMode };
+        var detail = { url: a.url, active: false, pinned: a.pinned };
         browser.tabs.create(detail);
       }
       browser.notifications.create(a.url,

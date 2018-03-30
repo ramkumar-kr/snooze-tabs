@@ -54,3 +54,7 @@ p#domainText{
     text-decoration: none;
     text-align: center;
 }
+
+#list{
+    min-width: 350px;
+}
