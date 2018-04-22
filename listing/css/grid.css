@@ -1,6 +1,8 @@
 .wrapper{
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 5fr 1fr;
+    padding: 5px;
+    align-items: center
 }
 
 .wrapper + .wrapper {
@@ -8,12 +10,17 @@
 }
 
 .danger-button{
+    border-radius: 2px;
     height: 100%;
-    width: fit-content;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: auto;
     border: none;
-    text-align: center;
-    background-color: firebrick;
+    font-size: 13px;
+    font-weight: 400;
+    background-color: #d70022;
     color: white;
+    text-align: center;
 }
 
 .date{
@@ -30,10 +37,10 @@
 }
 
 p#domainText{
-    text-overflow: ellipsis;
     text-align: center;
+    max-width:  1fr;
     align-self: top center;
-    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .block-button{
@@ -53,4 +60,9 @@ p#domainText{
     height: 48px;
     text-decoration: none;
     text-align: center;
+}
+
+#list{
+    margin-right: 5px;
+    margin-left: 5px;
 }
