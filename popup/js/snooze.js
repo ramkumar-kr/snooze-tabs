@@ -66,7 +66,7 @@ async function snoozeTab(type) {
       break;
 
     default:
-      alert("Something went wrong!!! Please try again");
+      alert("Something went wrong!!! Please try again" + type);
       return;
       break;
   }
@@ -76,7 +76,7 @@ async function snoozeTab(type) {
 const elements = document.getElementsByClassName("one-click");
 Array.from(elements).forEach((element) => {
   element.addEventListener("click", (e) => {
-    snoozeTab(e.target.id);
+    snoozeTab(element.id);
     window.close();
   });
 });
