@@ -26,3 +26,7 @@ Please create an issue or more preferably a pull request and we can discuss abou
 ## Building
 There is no build step. Just load the extension from chrome://extensions or about:debugging#addons to get started.
 
+## Todo items
+- [ ] Multi account Containers support
+- [ ] Custom timers
+- [ ] Better UI and UX for all pages
