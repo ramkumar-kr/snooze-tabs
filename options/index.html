@@ -8,16 +8,46 @@
 
 <body>
   <h1>Preferences</h1>
-  <div class="grid">
-    <div class="mini-grid">
-        <label for="laterHours" id="laterHourslabel"> <h3>Later today hours</h3> ( Number of hours by which a tab is snoozed when "Later" option is selected.) (range is allowed from 1 to 6) (Default is 3) </label>
-        <input type="number" id="laterHours" min="1" max="6" class="grid-input"/>
+  <div class="list">
+    <div class="one">
+        <label for="laterHours" id="laterHourslabel"> <b>Later today hours</b> </label>
+        <input type="number" id="laterHours" min="1" max="6" class=""/>
+        <div><button id="laterHoursHelpBtn">?</button></div>
+        
     </div>
 
-    <div class="mini-grid">
-        <label for="timeOfDay" id="timeOfDayLabel"> <h3>Preferred time of the day</h3> (Time of the dday snoozed when options like tomorrow,  weekend etc., are selected.) (Default - 09:00 AM) </label>
+    <div class="one">
+        <label for="timeOfDay" id="timeOfDayLabel"> <b>Preferred time of the day</b> </label>
         <input type="time" id="timeOfDay" class="grid-input" />
+        <div><button id="timeOfDayHelpBtn">?</button></div>
     </div>
+
+    <!-- <div class="one">
+      <label for="storageClass" id="storageClass"> <b>Use Local/Sync storage</b> </label>
+      <div id="storageClass">
+        <input type="radio" value="local" name="storageType" id="localStorage"/>
+        <label for="localStorage">Local</label>
+        <input type="radio" value="sync" id="syncStorage" name="storageType"/>
+        <label for="syncStorage">Sync</label>
+      </div>
+      <div><button id="timeOfDayHelpBtn">?</button></div>
+  </div>
+  </div> -->
+
+  <div id="timeOfDayModal" class="modal">
+    <div class="modal-content">
+      <span id="closetimeOfDayModal" class="close">&times;</span>
+      <p>Set the time of the day when options like tomorrow, weekend etc., are selected.</p> 
+      <p>The default time is 09:00 AM</p>
+    </div>
+  </div>
+
+  <div id="laterHoursModal" class="modal">
+    <div class="modal-content">
+      <span id="closelaterHoursModal" class="close">&times;</span>
+      <p>Set the number of hours by which a tab is snoozed when <b>Later</b> option is selected.</p>
+      <p>The range allowed is from 1 to 6 hours and the default is 3 hours.</p>
+    </div>  
   </div>
 </body>
 <script src="js/options.js"></script>
