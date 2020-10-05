@@ -1,26 +1,51 @@
-.grid{
-     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 5px;
+.modal{
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.mini-grid{
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.one{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(40px, 1fr);
-    grid-row-gap: 20px;
-    border-bottom: 2px solid gainsboro;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    grid-template-columns: 20% 60% 20%;
+    column-gap: 1%;
 }
 
-.mini-grid:last-child{
-    border-bottom: none;
+.list{
+    display: grid;
+    row-gap: 10px;
 }
 
-.grid-input{
-    height: 50%;
-    width: fit-content;
-    margin-top: 25%;
-    margin-bottom: 25%;
+body {
+    width: 100%;
+    height: 100%;
 }

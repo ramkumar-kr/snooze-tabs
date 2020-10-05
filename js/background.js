@@ -21,6 +21,9 @@ async function handleAlarm(alarm) {
       }
       else{
         var detail = { url: a.url, active: false, pinned: a.pinned, openInReaderMode: a.openInReaderMode };
+        if(a.cookieStoreId != undefined){
+          detail.cookieStoreId = a.cookieStoreId
+        }
         browser.tabs.create(detail);
       }
       browser.notifications.create(a.url,
@@ -82,7 +85,7 @@ async function snoozeTab(delay) {
     if(alarms == undefined){
       alarms = [];
     }
-    alarms.unshift({ url: tab.url, title: tab.title, delay: delay, pinned: tab.pinned, incognito: tab.incognito, openInReaderMode: tab.isInReaderMode });
+    alarms.unshift({ url: tab.url, title: tab.title, delay: delay, pinned: tab.pinned, incognito: tab.incognito, openInReaderMode: tab.isInReaderMode, cookieStoreId: tab.cookieStoreId });
     browser.alarms.create(tab.url, { "when": delay });
     storeAlarms(alarms);
     browser.notifications.create(tab.url,
@@ -174,6 +177,7 @@ async function removeDuplicates(alarms) {
   })
   return uniqAlarms;
 }
+
 
 async function handleInstall(details) {
   if (details.reason === "update") {

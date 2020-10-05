@@ -1,14 +1,15 @@
 {
   "manifest_version": 2,
   "name": "Tab Snooze",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "Ramkumar K R",
   "description":"Snooze tabs to open at a specific time",
   "permissions": [
     "tabs",
     "notifications",
     "alarms",
-    "storage"
+    "storage",
+    "cookies"
   ],
   "browser_action": {
     "theme_icons": [

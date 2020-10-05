@@ -1,3 +1,25 @@
+document.getElementById("laterHoursHelpBtn").addEventListener("click", (e) => {
+    var modal = document.getElementById("laterHoursModal");
+    modal.style.display="block"
+})
+
+document.getElementById("closelaterHoursModal").addEventListener("click", (e) => {
+    var modal = document.getElementById("laterHoursModal");
+    modal.style.display="none";
+})
+
+
+document.getElementById("timeOfDayHelpBtn").addEventListener("click", (e) => {
+    var modal = document.getElementById("timeOfDayModal");
+    modal.style.display="block"
+})
+
+document.getElementById("closetimeOfDayModal").addEventListener("click", (e) => {
+    var modal = document.getElementById("timeOfDayModal");
+    modal.style.display="none";
+})
+
+
 document.getElementById("laterHours").addEventListener("change", (e) => { 
     browser.runtime.sendMessage({ op: 'setPreferences', args: { hours: parseInt(e.target.value) } });
 })
